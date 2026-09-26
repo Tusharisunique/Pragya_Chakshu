@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "cytoscape": "^3.30.0",
+    "d3": "^7.9.0",
+    "framer-motion": "^13.4.3",
     "lucide-react": "^0.446.0",
     "react": "^19.0.0",
     "react-cytoscapejs": "^2.0.0",

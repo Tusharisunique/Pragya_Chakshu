@@ -132,8 +132,11 @@ def detect_coordination_network(case_id: str, max_pairs: int = 50) -> Dict[str, 
         
         handle1 = p1['canonical_handle'] if p1 else f"User_{u1}"
         handle2 = p2['canonical_handle'] if p2 else f"User_{u2}"
-        p1_id = p1['persona_id'] if p1 else f"persona:forum:{u1}"
-        p2_id = p2['persona_id'] if p2 else f"persona:forum:{u2}"
+        # Uids with no persona in this case become derived placeholder actors.
+        # Scope those ids by case, otherwise the same forum user is one shared
+        # node across investigations and their coordination links cross cases.
+        p1_id = p1['persona_id'] if p1 else f"persona:forum:{case_id}:{u1}"
+        p2_id = p2['persona_id'] if p2 else f"persona:forum:{case_id}:{u2}"
 
         internal = pair_interactions.get((u1, u2), {'count': 0, 'threads': set(), 'latencies': []})
         hist = historical_pairs.get((u1, u2), {'weight': 0.0, 'count': 0, 'time_diffs': []})

@@ -138,6 +138,7 @@ def ingest_forum_posts(case_id, limit=20):
                 "RESEARCH",
                 persona_id,
                 post_pid=post.get("pid"),
+                case_id=case_id,
             )
 
         ingested_count += 1

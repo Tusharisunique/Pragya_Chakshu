@@ -13,8 +13,19 @@ from typing import Dict, List, Any, Optional
 from backend.database.sqlite import get_connection
 from backend.analytics.correlation import evaluate_persona_correlation
 
+# Each independent supporting signal type beyond the first adds this much to a
+# pair's score. A single weak signal should not be enough to claim that two
+# accounts belong to the same person.
+CORROBORATION_BONUS = 8.0
 
-def run_evaluation_benchmark(case_id: str, threshold: float = 40.0) -> Dict[str, Any]:
+# Evidence confidence_weight is recorded on a 0-40 scale, not a percentage. The
+# strongest single-signal tier the correlator emits is 25, so 25 is the natural
+# cut: it keeps every well-supported link and drops weak ones. The previous
+# default of 40 rejected everything, and callers passing 10 accepted everything.
+DEFAULT_SCORE_THRESHOLD = 25.0
+
+
+def run_evaluation_benchmark(case_id: str, threshold: float = DEFAULT_SCORE_THRESHOLD) -> Dict[str, Any]:
     """
     Evaluates all correlated persona pairs in the case against the ground truth matches.
     Computes TP, FP, FN, Precision, Recall, and F1 score at the specified confidence threshold.
@@ -72,7 +83,8 @@ def run_evaluation_benchmark(case_id: str, threshold: float = 40.0) -> Dict[str,
     # 4. Fetch or calculate correlations for candidate pairs in the case
     cursor.execute(
         """
-        SELECT source_persona_id, target_persona_id, confidence_weight 
+        SELECT source_persona_id, target_persona_id, evidence_type, polarity,
+               confidence_weight
         FROM evidence 
         WHERE case_id=? AND challenge_status='ACTIVE'
     """,
@@ -83,20 +95,41 @@ def run_evaluation_benchmark(case_id: str, threshold: float = 40.0) -> Dict[str,
     # If pre-stored evidence exists, use it directly; otherwise evaluate candidate pairs
     predicted_pairs = {}
     if evidence_rows:
+        # Aggregate per pair, keeping polarity strictly separate.
+        # CONFLICTING evidence is evidence *against* a shared identity, so it can
+        # never create a prediction. Treating it as a prediction was the main
+        # reason precision collapsed: the case held 3281 conflicting rows against
+        # 318 supporting ones, and every one of them became a claimed match.
+        support = {}
+        against = {}
         for r in evidence_rows:
-            src = r["source_persona_id"]
-            tgt = r["target_persona_id"]
-            score = float(r["confidence_weight"] or 0.0)
-            if score >= threshold:
-                fp = persona_map.get(src, {})
-                mp = persona_map.get(tgt, {})
-                predicted_pairs[(src, tgt)] = {
-                    "score": score,
-                    "forum_handle": fp.get("canonical_handle", "Unknown"),
-                    "market_handle": mp.get("canonical_handle", "Unknown"),
-                    "forum_uid": fp.get("raw_uid"),
-                    "market_vid": mp.get("raw_vid"),
-                }
+            pair = (r["source_persona_id"], r["target_persona_id"])
+            weight = float(r["confidence_weight"] or 0.0)
+            if r["polarity"] == "SUPPORTING":
+                rec = support.setdefault(pair, {"weight": 0.0, "types": set()})
+                rec["weight"] = max(rec["weight"], weight)
+                rec["types"].add(r["evidence_type"])
+            else:
+                against[pair] = against.get(pair, 0) + 1
+
+        for pair, rec in support.items():
+            # Independent signal types corroborate one another, so each extra
+            # type beyond the first strengthens the link.
+            score = min(100.0, rec["weight"] + CORROBORATION_BONUS * (len(rec["types"]) - 1))
+            if score < threshold:
+                continue
+            src, tgt = pair
+            fp = persona_map.get(src, {})
+            mp = persona_map.get(tgt, {})
+            predicted_pairs[pair] = {
+                "score": round(score, 1),
+                "signal_types": sorted(t for t in rec["types"] if t),
+                "conflicting_signals": against.get(pair, 0),
+                "forum_handle": fp.get("canonical_handle", "Unknown"),
+                "market_handle": mp.get("canonical_handle", "Unknown"),
+                "forum_uid": fp.get("raw_uid"),
+                "market_vid": mp.get("raw_vid"),
+            }
     else:
         for fp in forum_personas:
             for mp in market_personas:

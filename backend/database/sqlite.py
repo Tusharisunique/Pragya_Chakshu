@@ -21,6 +21,7 @@ def init_database():
         name TEXT NOT NULL,
         description TEXT,
         status TEXT CHECK(status IN ('OPEN','ACTIVE','REVIEW','RESOLVED','ARCHIVED')),
+        owner_id TEXT,
         created_at TIMESTAMP,
         updated_at TIMESTAMP
     );
@@ -142,7 +143,21 @@ def init_database():
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(case_id) REFERENCES cases(case_id)
     );
+
+    -- Indexes for query performance (correlation engine, infra lookup, owner filter)
+    CREATE INDEX IF NOT EXISTS idx_personas_case     ON personas(case_id);
+    CREATE INDEX IF NOT EXISTS idx_identifiers_persona ON identifiers(persona_id);
+    CREATE INDEX IF NOT EXISTS idx_evidence_case     ON evidence(case_id);
+    CREATE INDEX IF NOT EXISTS idx_evidence_pair     ON evidence(source_persona_id, target_persona_id);
+    CREATE INDEX IF NOT EXISTS idx_events_case       ON normalized_events(case_id, event_type);
+    CREATE INDEX IF NOT EXISTS idx_cases_owner       ON cases(owner_id);
     """)
+
+    # Runtime migration: safely add owner_id column to existing DBs
+    try:
+        cursor.execute("ALTER TABLE cases ADD COLUMN owner_id TEXT")
+    except Exception:
+        pass  # Column already exists - safe to ignore
 
     conn.commit()
     conn.close()

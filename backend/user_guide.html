@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pragya Chakshu — User Guide</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #263144;
+      --border: #334155;
+      --cyan: #06b6d4;
+      --cyan-dark: #0891b2;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --purple: #a855f7;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --heading: #f1f5f9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* ── Cover Page ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1a2e 100%);
+      text-align: center;
+      padding: 60px 40px;
+      page-break-after: always;
+    }
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(6,182,212,0.12);
+      border: 1px solid rgba(6,182,212,0.35);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 28px;
+    }
+    .cover h1 {
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--heading);
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+    .cover h1 span { color: var(--cyan); }
+    .cover-sub {
+      font-size: 20px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 300;
+    }
+    .cover-hint {
+      font-size: 13px;
+      color: var(--border);
+      margin-top: 40px;
+      font-style: italic;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      page-break-after: always;
+    }
+    .toc h2 { font-size: 22px; color: var(--cyan); margin-bottom: 24px; }
+    .toc ol { list-style: none; padding: 0; counter-reset: toc; }
+    .toc ol li {
+      counter-increment: toc;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+      font-size: 14px;
+    }
+    .toc ol li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-weight: 700;
+      color: var(--cyan);
+      font-size: 12px;
+      min-width: 28px;
+    }
+
+    /* ── Body ── */
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(6,182,212,0.15);
+      border: 1px solid rgba(6,182,212,0.3);
+      font-weight: 800;
+      color: var(--cyan);
+      font-size: 14px;
+      shrink: 0;
+    }
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--heading);
+    }
+
+    p { margin-bottom: 14px; color: var(--text); }
+    h3 { font-size: 17px; color: var(--heading); margin: 28px 0 10px; font-weight: 700; }
+    h4 { font-size: 14px; color: var(--cyan); margin: 20px 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    /* Callout boxes */
+    .callout {
+      border-left: 4px solid;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 14px;
+    }
+    .callout.tip { border-color: var(--green); background: rgba(16,185,129,0.07); }
+    .callout.note { border-color: var(--cyan); background: rgba(6,182,212,0.07); }
+    .callout.warn { border-color: var(--amber); background: rgba(245,158,11,0.07); }
+    .callout-title { font-weight: 700; margin-bottom: 4px; }
+    .callout.tip .callout-title { color: var(--green); }
+    .callout.note .callout-title { color: var(--cyan); }
+    .callout.warn .callout-title { color: var(--amber); }
+
+    /* Step flow */
+    .steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+    .step {
+      display: flex;
+      gap: 16px;
+      position: relative;
+    }
+    .step-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(6,182,212,0.2);
+      border: 2px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--cyan);
+      shrink: 0;
+      flex-shrink: 0;
+    }
+    .step-connector {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      margin: 4px 0;
+      min-height: 24px;
+    }
+    .step:last-child .step-connector { display: none; }
+    .step-body { padding-bottom: 24px; flex: 1; }
+    .step-title { font-weight: 700; color: var(--heading); margin-bottom: 4px; font-size: 15px; }
+    .step-desc { color: var(--muted); font-size: 14px; }
+    .step-desc code {
+      background: rgba(6,182,212,0.12);
+      border: 1px solid rgba(6,182,212,0.25);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--cyan);
+    }
+
+    /* Feature grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .feature-icon { font-size: 22px; margin-bottom: 8px; }
+    .feature-title { font-weight: 700; color: var(--heading); font-size: 14px; margin-bottom: 4px; }
+    .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* Example scenario */
+    .scenario {
+      background: var(--surface2);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin: 20px 0;
+    }
+    .scenario-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--purple);
+      margin-bottom: 10px;
+    }
+    .scenario-title { font-size: 16px; font-weight: 700; color: var(--heading); margin-bottom: 10px; }
+    .scenario p { font-size: 14px; color: var(--muted); }
+
+    /* Evidence scoring table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--surface2); color: var(--muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+    td { color: var(--text); }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .b-green { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+    .b-red { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+    .b-cyan { background: rgba(6,182,212,0.12); color: var(--cyan); border: 1px solid rgba(6,182,212,0.25); }
+    .b-amber { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+    .b-purple { background: rgba(168,85,247,0.12); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+
+    /* Glossary */
+    .glossary dt { font-weight: 700; color: var(--cyan); margin-top: 16px; }
+    .glossary dd { color: var(--muted); font-size: 14px; margin-left: 12px; }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #1e293b; }
+      .cover { background: #1e293b; }
+      .step-connector { background: #cbd5e1; }
+      .card, .feature-card { border: 1px solid #cbd5e1; background: #f8fafc; }
+      .scenario { background: #f5f3ff; border-color: #a855f7; }
+    }
+
+    /* Nav bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: rgba(15,23,42,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 32px;
+      z-index: 100;
+      font-size: 13px;
+    }
+    .navbar-brand { font-weight: 800; color: var(--cyan); letter-spacing: 0.05em; }
+    .navbar a { color: var(--muted); text-decoration: none; }
+    .navbar a:hover { color: var(--cyan); }
+    .navbar .print-btn {
+      margin-left: auto;
+      background: var(--cyan);
+      color: #0f172a;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .body-offset { padding-top: 52px; }
+    @media print { .navbar { display: none; } .body-offset { padding-top: 0; } }
+      .g-ico {
+        width: 1em; height: 1em;
+        vertical-align: -0.14em;
+        display: inline-block;
+        color: inherit;
+    }
+    .feature-icon .g-ico { width: 26px; height: 26px; vertical-align: 0; }
+</style>
+</head>
+<body>
+<!-- Icon sprite. Emoji render differently on every platform, so the guide
+     draws its own; #gi-<name> is referenced with <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gi-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></symbol>
+  <symbol id="gi-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><path d="M7 18H4.5v-6h15v6H17"/><path d="M7 14.5h10v6H7z"/></symbol>
+  <symbol id="gi-document" viewBox="0 0 24 24"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5"/></symbol>
+  <symbol id="gi-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5"/></symbol>
+  <symbol id="gi-link" viewBox="0 0 24 24"><path d="M10 13.5a4 4 0 005.7 0l2.8-2.8a4 4 0 00-5.7-5.7L11.5 6.3"/><path d="M14 10.5a4 4 0 00-5.7 0l-2.8 2.8a4 4 0 005.7 5.7l1.3-1.3"/></symbol>
+  <symbol id="gi-pencil" viewBox="0 0 24 24"><path d="M4 20l4.5-1 10-10a2.1 2.1 0 00-3-3l-10 10z"/><path d="M14 6.5l3 3"/></symbol>
+  <symbol id="gi-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.4 2"/></symbol>
+  <symbol id="gi-key" viewBox="0 0 24 24"><circle cx="7.5" cy="14.5" r="3.5"/><path d="M10 12l8-8 2.5 2.5-1.8 1.8 1.6 1.6-2.2 2.2-1.6-1.6-2 2"/></symbol>
+  <symbol id="gi-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.4 3.6 8.5S14.4 18.1 12 20.5c-2.4-2.4-3.6-5.4-3.6-8.5S9.6 5.9 12 3.5z"/></symbol>
+  <symbol id="gi-masks" viewBox="0 0 24 24"><path d="M3.5 7.5h17v3.5a5 5 0 01-5 5h-2.5v3.5h-2V16h-2.5a5 5 0 01-5-5z"/></symbol>
+  <symbol id="gi-tag" viewBox="0 0 24 24"><path d="M3.5 11.5V4.5h7l9.5 9.5-7 7z"/><circle cx="7.5" cy="8.5" r="1.4"/></symbol>
+  <symbol id="gi-replay" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 1.9"/><path d="M4.8 9.5A8.5 8.5 0 0112 3.5"/></symbol>
+  <symbol id="gi-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="gi-inbox" viewBox="0 0 24 24"><path d="M3.5 13.5h4l1.5 3h6l1.5-3h4"/><path d="M3.5 13.5L6 4.5h12l2.5 9v6h-17z"/></symbol>
+  <symbol id="gi-detective" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M8 10.2h.01M13 10.2h.01M8 13.4c1.3 1.3 3.7 1.3 5 0"/><path d="M9.5 4.5L8 2.5M12 4.2V2M14.5 4.5L16 2.5"/></symbol>
+  <symbol id="gi-handshake" viewBox="0 0 24 24"><path d="M8 12.5l-2.5 2.5a1.8 1.8 0 002.5 2.5L11 15"/><path d="M16 12.5l2.5 2.5a1.8 1.8 0 01-2.5 2.5L13 15"/><path d="M8 12.5l4-4 4 4-2 2-2-2-2 2z"/></symbol>
+  <symbol id="gi-crane" viewBox="0 0 24 24"><path d="M4 20.5h16"/><path d="M6 20.5V8l8-4.5"/><path d="M6 12h8"/><path d="M14 3.5v4"/></symbol>
+  <symbol id="gi-chart" viewBox="0 0 24 24"><path d="M4 20.5h16"/><rect x="5.5" y="12" width="3.5" height="6"/><rect x="10.5" y="8" width="3.5" height="10"/><rect x="15.5" y="4.5" width="3.5" height="13.5"/></symbol>
+  <symbol id="gi-note" viewBox="0 0 24 24"><path d="M6 2.5h9l3.5 3.5v15.5H6z"/><path d="M9 11h6M9 14.5h6M9 7.5h3"/></symbol>
+  <symbol id="gi-receipt" viewBox="0 0 24 24"><path d="M6 2.5h12v19l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4z"/><path d="M9 7.5h6M9 11h6M9 14.5h4"/></symbol>
+  <symbol id="gi-folder" viewBox="0 0 24 24"><path d="M3.5 6.5h6l2 2.5h9v11h-17z"/><path d="M3.5 6.5v-1h5l2 2.5"/></symbol>
+  <symbol id="gi-bulb" viewBox="0 0 24 24"><path d="M9 17.5h6"/><path d="M10 20.5h4"/><path d="M12 2.5a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2h5c0-.8.4-1.5 1-2A6 6 0 0012 2.5z"/></symbol>
+  <symbol id="gi-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.4l2.8 2.8L16.2 9.6"/></symbol>
+  <symbol id="gi-warning" viewBox="0 0 24 24"><path d="M12 3.5l9 16.5H3z"/><path d="M12 9.5v4.5M12 16.8h.01"/></symbol>
+  <symbol id="gi-text" viewBox="0 0 24 24"><path d="M4 6.5V4.5h16v2"/><path d="M12 4.5v15"/><path d="M9 19.5h6"/></symbol>
+  <symbol id="gi-pin" viewBox="0 0 24 24"><path d="M12 21.5s6.5-6.7 6.5-11a6.5 6.5 0 10-13 0c0 4.3 6.5 11 6.5 11z"/><circle cx="12" cy="10.5" r="2.3"/></symbol>
+  <symbol id="gi-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></symbol>
+</svg>
+
+
+<nav class="navbar">
+  <span class="navbar-brand"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-search"/></svg> PRAGYA CHAKSHU</span>
+  <a href="#what-is">What Is It?</a>
+  <a href="#concepts">Key Concepts</a>
+  <a href="#walkthrough">How to Use</a>
+  <a href="#example">Example</a>
+  <a href="#glossary">Glossary</a>
+  <button class="print-btn" onclick="window.print()"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-print"/></svg> Save as PDF</button>
+</nav>
+
+<div class="body-offset">
+
+<!-- ═══════════════════════════════════════════════════
+     COVER
+════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-document"/></svg> User Guide &nbsp;•&nbsp; v1.0</div>
+  <h1>PRAGYA<br/><span>CHAKSHU</span></h1>
+  <div class="cover-sub">प्रज्ञा चक्षु — "The Eye of Wisdom"</div>
+  <p style="color:var(--muted);font-size:16px;max-width:520px;margin-top:18px;line-height:1.7">
+    A complete beginner-friendly guide to the cybersecurity research &amp;
+    attribution platform. No technical background required.
+  </p>
+  <div class="cover-hint">Click <svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-print"/></svg> Save as PDF in the top-right corner to save this guide as a PDF.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TABLE OF CONTENTS
+════════════════════════════════════════════════════ -->
+<div class="toc" id="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li>What is Pragya Chakshu?</li>
+    <li>The Problem it Solves: A Simple Analogy</li>
+    <li>Key Concepts Explained Simply</li>
+    <li>Platform Features Overview</li>
+    <li>Step-by-Step: How to Use the Platform</li>
+    <li>Worked Example: Operation Cardinal</li>
+    <li>Understanding the Score System</li>
+    <li>Reading the Case Summary</li>
+    <li>Exporting Your Findings</li>
+    <li>Glossary of Terms</li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 1 — WHAT IS IT?
+════════════════════════════════════════════════════ -->
+<div class="page" id="what-is">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>What is Pragya Chakshu?</h2>
+  </div>
+
+  <p>
+    <strong style="color:var(--heading)">Pragya Chakshu</strong> (Sanskrit for <em>"The Eye of Wisdom"</em>)
+    is a forensic investigation platform. It helps cybersecurity researchers analyse historical data from
+    dark-web forums and marketplaces to figure out:
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-user"/></svg></div>
+      <div class="feature-title">Who is hiding behind a username?</div>
+      <div class="feature-desc">Match anonymous identities across different platforms using mathematical analysis.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-handshake"/></svg></div>
+      <div class="feature-title">Are these people working together?</div>
+      <div class="feature-desc">Detect groups that post in suspicious coordination or always appear together.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-globe"/></svg></div>
+      <div class="feature-title">What infrastructure do they share?</div>
+      <div class="feature-desc">Find .onion services and servers linked to the same operators via digital fingerprints.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-note"/></svg></div>
+      <div class="feature-title">What's the overall picture?</div>
+      <div class="feature-desc">Generate a plain-English summary of all findings, with a cryptographically sealed report.</div>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <div class="callout-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-bulb"/></svg> Important Note</div>
+    Pragya Chakshu works exclusively on <strong>historical, archived data</strong>. It does not
+    actively scan, crawl, or connect to any live networks. Everything it analyses is from research archives.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 2 — ANALOGY
+════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>The Problem it Solves: A Simple Analogy</h2>
+  </div>
+
+  <p>
+    Imagine a criminal uses a fake name at a local market and a completely different fake name in
+    an online forum. Normally, you'd never connect them. But if you could compare their:
+  </p>
+
+  <div class="card">
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;">
+      <li><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-pencil"/></svg> <strong>Writing style</strong>: do they use the same unusual phrases? Same punctuation habits?</li>
+      <li><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-clock"/></svg> <strong>Active hours</strong>: do they post at the same time of day, every day?</li>
+      <li><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-key"/></svg> <strong>Crypto keys</strong>: did they use the same PGP key or Bitcoin address in both places?</li>
+      <li><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-globe"/></svg> <strong>Links</strong>: did they mention the same .onion website in posts on both platforms?</li>
+    </ul>
+  </div>
+
+  <p>
+    If multiple signals point the same way, the system assigns a high <strong>correlation score</strong>,
+    which is a number that represents how confident it is that these two usernames belong to the same person.
+  </p>
+
+  <div class="callout tip">
+    <div class="callout-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-check"/></svg> Think of it like this</div>
+    The system is like a detective who reads through thousands of forum posts, compares handwriting
+    styles, checks diaries for consistent sleep patterns, and flags anyone who wrote the exact same
+    secret code in two different places, and then presents the findings to you in a simple report.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 3 — KEY CONCEPTS
+════════════════════════════════════════════════════ -->
+<div class="page" id="concepts">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Key Concepts Explained Simply</h2>
+  </div>
+
+  <h3><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-masks"/></svg> Persona</h3>
+  <p>
+    A <strong>Persona</strong> is a unique identity, a username, found on a specific platform.
+    For example, "DarkKnight99" on the forum is one persona, and "Vendor_X" on the marketplace
+    is another. They may or may not be the same real person.
+  </p>
+
+  <h3><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-link"/></svg> Correlation</h3>
+  <p>
+    A <strong>Correlation</strong> is the system's hypothesis that two personas are the same person.
+    It is expressed as a score between 0 and 100+. The higher the score, the stronger the suspicion.
+    No score is treated as absolute proof; it is always an investigative lead.
+  </p>
+
+  <h3><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-tag"/></svg> Provenance Tags</h3>
+  <p>Every piece of data in the system is tagged with one of three labels:</p>
+  <table>
+    <tr><th>Tag</th><th>Meaning</th><th>Example</th></tr>
+    <tr>
+      <td><span class="badge b-cyan">RESEARCH</span></td>
+      <td>Real historical data from archives</td>
+      <td>An actual forum post from 2014</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-purple">DERIVED</span></td>
+      <td>Computed/inferred by the algorithm</td>
+      <td>A writing style score calculated from posts</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-amber">SYNTHETIC</span></td>
+      <td>Safely simulated infrastructure (not real)</td>
+      <td>A fake server IP used for testing</td>
+    </tr>
+  </table>
+
+  <h3><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-globe"/></svg> Graph Canvas</h3>
+  <p>
+    The <strong>Graph Canvas</strong> is the big network diagram in the centre of the screen.
+    Every dot (node) is a person, post, or identifier. Every line (edge) between them shows a relationship,
+    like "this person authored this post" or "these two users are probably the same person."
+  </p>
+
+  <h3><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-replay"/></svg> Replay Engine</h3>
+  <p>
+    The <strong>Replay Engine</strong> lets you "rewind time" and watch events unfold in
+    chronological order, like playing back a security camera recording, but for forum activity.
+    You can speed it up to 60× real time.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 4 — FEATURES
+════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Platform Features Overview</h2>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-inbox"/></svg></div>
+      <div class="feature-title">Dataset Ingestion</div>
+      <div class="feature-desc">Load slices of forum posts, vendor profiles, and market listings into a case for analysis.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-detective"/></svg></div>
+      <div class="feature-title">Identity Attribution</div>
+      <div class="feature-desc">Correlate personas across platforms using writing style, activity times, and shared identifiers.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-handshake"/></svg></div>
+      <div class="feature-title">Coordination Detection</div>
+      <div class="feature-desc">Find groups of users who reply to each other suspiciously fast or always appear together.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-crane"/></svg></div>
+      <div class="feature-title">Infrastructure Analysis</div>
+      <div class="feature-desc">Simulate darknet hosting clusters and find services sharing the same server via TLS/SSH fingerprints.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-chart"/></svg></div>
+      <div class="feature-title">Evaluation Mode</div>
+      <div class="feature-desc">Compare your findings against a hidden ground-truth file to measure precision, recall and F1 score.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-note"/></svg></div>
+      <div class="feature-title">Investigator Notes</div>
+      <div class="feature-desc">Attach timestamped notes to any person, post, or link in the graph for audit trail purposes.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-receipt"/></svg></div>
+      <div class="feature-title">Case Summary</div>
+      <div class="feature-desc">Generate a plain-English summary of all findings, explained simply so anyone can understand.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-folder"/></svg></div>
+      <div class="feature-title">Forensic Dossier Export</div>
+      <div class="feature-desc">Export a printable PDF dossier with a SHA-256 cryptographic seal for chain of custody.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 5 — WALKTHROUGH
+════════════════════════════════════════════════════ -->
+<div class="page" id="walkthrough">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2>Step-by-Step: How to Use the Platform</h2>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">1</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Open the platform</div>
+        <div class="step-desc">Go to <code>http://localhost:5173</code> in your browser. You'll see the landing page with a list of investigations.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">2</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Create a new investigation</div>
+        <div class="step-desc">Click the left panel, type a case name (e.g. "Operation Cardinal"), add a short description, and click <code>Initialize Investigation Workspace</code>. A new case is created and you are taken to the workspace.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">3</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Ingest data</div>
+        <div class="step-desc">In the left sidebar, click the <code>Ingest</code> tab. Choose a dataset source (Forum, Market Vendors, Listings, or All) and set a limit (e.g. 50 records). Click <code>Ingest Dataset Slice</code>. The graph canvas will populate with nodes.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">4</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Explore the graph</div>
+        <div class="step-desc">Click on any dot (node) in the graph to inspect it. Use the <code>View Preset</code> buttons at the top to switch between different views. Hover over a node to dim everything else and focus on it.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">5</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Run correlation analysis</div>
+        <div class="step-desc">Look for the <code>Run Correlation</code> button in the right panel. This tells the system to mathematically compare all personas and draw links between those that appear to be the same person. Stronger matches appear as thicker lines.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">6</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Read the Case Summary</div>
+        <div class="step-desc">Click the <code>Summary</code> tab in the left sidebar. Press <code>Generate Summary</code> to get a plain-English report of everything found so far: who was identified, what evidence exists, and what it all means.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">7</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Challenge questionable evidence</div>
+        <div class="step-desc">Click on any correlation edge (the coloured lines) in the graph and look at the evidence list. If a piece of evidence seems wrong (e.g. a common greeting that doesn't prove same identity), you can click <code>Challenge</code> to remove its weight. The score updates immediately.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">8</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Export the dossier</div>
+        <div class="step-desc">When you're done, click <code>Export Dossier</code>. A formatted HTML report opens. Press <code>Ctrl+P</code> (or Cmd+P on Mac) to save it as a PDF. It includes all findings with a SHA-256 cryptographic seal.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-warning"/></svg> Deleting an Investigation</div>
+    To delete a case, go back to the landing page and hover over the case card. A red trash icon
+    will appear. Click it and confirm the deletion. <strong>This cannot be undone.</strong> All data
+    for that case is permanently erased.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 6 — EXAMPLE
+════════════════════════════════════════════════════ -->
+<div class="page" id="example">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2>Worked Example: Operation Cardinal</h2>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-masks"/></svg> Fictional Scenario</div>
+    <div class="scenario-title">Finding the person behind two anonymous identities</div>
+    <p>All names and events in this example are entirely fictional and for demonstration purposes only.</p>
+  </div>
+
+  <h3>The Setup</h3>
+  <p>
+    Imagine a researcher is studying a fictional dark-web drug marketplace archive from 2015.
+    They have noticed that a forum user called <strong style="color:var(--cyan)">"RedHawk"</strong>
+    and a marketplace vendor called <strong style="color:var(--amber)">"CardinalV"</strong>
+    seem suspicious. Could they be the same person?
+  </p>
+
+  <h3>Step 1: Create the case</h3>
+  <p>The researcher creates a new investigation called "Operation Cardinal" and ingests 100 records from the forum and 50 vendor profiles from the marketplace.</p>
+
+  <h3>Step 2: Run Correlation</h3>
+  <p>After running the correlation engine, the system reports:</p>
+
+  <table>
+    <tr><th>Evidence Signal</th><th>Finding</th><th>Score Impact</th></tr>
+    <tr>
+      <td>PGP Key Match</td>
+      <td>Both accounts used the same PGP public key</td>
+      <td><span class="badge b-green">+40</span></td>
+    </tr>
+    <tr>
+      <td>Stylometry</td>
+      <td>Writing style similarity: 87% match</td>
+      <td><span class="badge b-green">+25</span></td>
+    </tr>
+    <tr>
+      <td>Diurnal Rhythm</td>
+      <td>Both active 22:00–03:00 UTC</td>
+      <td><span class="badge b-green">+15</span></td>
+    </tr>
+    <tr>
+      <td>Bitcoin Address</td>
+      <td>Same BTC address in two posts</td>
+      <td><span class="badge b-green">+20</span></td>
+    </tr>
+    <tr>
+      <td><strong>Total Score</strong></td>
+      <td><strong>Strong attribution hypothesis</strong></td>
+      <td><span class="badge b-green">100 / 100</span></td>
+    </tr>
+  </table>
+
+  <h3>Step 3: Generate Summary</h3>
+  <p>
+    The researcher clicks the <strong>Summary</strong> tab and presses <strong>Generate Summary</strong>.
+    The system produces a plain-English paragraph explaining that RedHawk and CardinalV are very likely
+    the same person based on a shared PGP key, identical writing habits, the same active hours,
+    and a shared Bitcoin address.
+  </p>
+
+  <h3>Step 4: Challenge and Export</h3>
+  <p>
+    The researcher notices that one piece of evidence, a common greeting phrase used by thousands of
+    users, was inflating the score. They click <strong>Challenge</strong> on that item, the score adjusts,
+    and then export the final dossier as a PDF with a SHA-256 seal.
+  </p>
+
+  <div class="callout tip">
+    <div class="callout-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-target"/></svg> Key Takeaway</div>
+    A single shared PGP key or Bitcoin address is already very strong evidence. Multiple signals together
+    make the attribution hypothesis extremely compelling, but it always remains a <em>hypothesis</em>,
+    not a legally proven fact.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 7 — SCORE SYSTEM
+════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2>Understanding the Score System</h2>
+  </div>
+
+  <p>
+    The system calculates a <strong>correlation score</strong> for each pair of personas.
+    Each type of evidence adds or subtracts from this score:
+  </p>
+
+  <table>
+    <tr><th>Signal</th><th>Impact</th><th>Explanation</th></tr>
+    <tr>
+      <td><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-key"/></svg> PGP Key Match</td>
+      <td><span class="badge b-green">+40</span></td>
+      <td>Same encryption key = very strong indicator of same person</td>
+    </tr>
+    <tr>
+      <td><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-text"/></svg> Handle Similarity</td>
+      <td><span class="badge b-green">+25</span></td>
+      <td>Similar usernames across platforms (e.g. "RedHawk99" / "r_hawk99")</td>
+    </tr>
+    <tr>
+      <td><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-pencil"/></svg> Writing Style Match</td>
+      <td><span class="badge b-green">+25</span></td>
+      <td>Vocabulary, punctuation, sentence length are statistically similar</td>
+    </tr>
+    <tr>
+      <td><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-pencil"/></svg> Writing Style Divergence</td>
+      <td><span class="badge b-red">−20</span></td>
+      <td>Writing styles are statistically very different, probably different people</td>
+    </tr>
+    <tr>
+      <td><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-clock"/></svg> Same Active Hours</td>
+      <td><span class="badge b-green">+15</span></td>
+      <td>Both post at the same time of day, suggesting same timezone/person</td>
+    </tr>
+    <tr>
+      <td><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-clock"/></svg> Conflicting Active Hours</td>
+      <td><span class="badge b-red">−25</span></td>
+      <td>Active at opposite times of day, probably different people</td>
+    </tr>
+    <tr>
+      <td>₿ Shared BTC / Onion</td>
+      <td><span class="badge b-green">+20</span></td>
+      <td>Same Bitcoin address or .onion URL used on both platforms</td>
+    </tr>
+  </table>
+
+  <h3>How to interpret scores</h3>
+  <table>
+    <tr><th>Score Range</th><th>Meaning</th></tr>
+    <tr><td>0–19</td><td>Very weak signal: likely different people</td></tr>
+    <tr><td>20–39</td><td>Weak signal: some similarities but inconclusive</td></tr>
+    <tr><td>40–59</td><td>Moderate: worth investigating further</td></tr>
+    <tr><td>60–79</td><td>Strong: high probability of same person</td></tr>
+    <tr><td>80+</td><td>Very strong: multiple independent signals align</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 8 — CASE SUMMARY
+════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <h2>Reading the Case Summary</h2>
+  </div>
+
+  <p>
+    The <strong>Case Summary</strong> (in the left sidebar's Summary tab) is a plain-English report
+    written automatically from all the data in your investigation. Here is how to read it:
+  </p>
+
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-note"/></svg> Opening Statement</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      Gives the case name and creation date. A quick orientation.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-search"/></svg> Who was found</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      Lists how many unique actors were identified, and names the first few from both forum and marketplace data.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-chart"/></svg> What was analysed</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      How many total data records (posts, vendor profiles, listings) were loaded into the case.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-link"/></svg> Identity Matching</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      How many evidence items were found linking actors across platforms, split into "supporting" and "conflicting."
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-target"/></svg> Strongest Lead</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      Names the single highest-confidence pair and explains what type of evidence made that connection.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-key"/></svg> Cryptographic Clues</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      Counts any PGP keys, Bitcoin addresses, or .onion links found in the data.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-pin"/></svg> Case Status</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      Whether the investigation is OPEN, ACTIVE, REVIEW, or RESOLVED.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 9 — EXPORT
+════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <h2>Exporting Your Findings</h2>
+  </div>
+
+  <p>There are two export options, available from the workspace toolbar:</p>
+
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-print"/></svg> Printable HTML Dossier</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      A formatted report with all personas, evidence, investigator notes, and challenge history.
+      Open in browser and use <strong>Ctrl+P → Save as PDF</strong>.
+      Includes a <strong>SHA-256 cryptographic seal</strong> at the bottom: a unique fingerprint of
+      the entire case state at the time of export. If any data is altered later, the fingerprint won't
+      match, proving the dossier's integrity.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-tag"/></svg> Structured JSON Export</div>
+    <p style="font-size:14px;color:var(--muted);margin:0">
+      A machine-readable JSON file containing all case data. Useful for importing into other analysis tools or archiving.
+    </p>
+  </div>
+
+  <div class="callout note">
+    <div class="callout-title"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-lock"/></svg> What is a SHA-256 Seal?</div>
+    A SHA-256 seal is like a fingerprint for a document. It's a 64-character code that is uniquely
+    generated from every single character in the dossier. If even one letter changes, the fingerprint
+    completely changes. This proves the document hasn't been tampered with since it was created.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 10 — GLOSSARY
+════════════════════════════════════════════════════ -->
+<div class="page" id="glossary">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <h2>Glossary of Terms</h2>
+  </div>
+
+  <dl class="glossary">
+    <dt>Persona</dt>
+    <dd>A unique username/identity on a specific platform (forum or marketplace).</dd>
+
+    <dt>Correlation</dt>
+    <dd>The system's hypothesis that two personas are the same real person, expressed as a score.</dd>
+
+    <dt>Provenance</dt>
+    <dd>The source or origin of a piece of data, either RESEARCH (real), DERIVED (computed), or SYNTHETIC (simulated).</dd>
+
+    <dt>Stylometry</dt>
+    <dd>The science of analysing writing style mathematically, using vocabulary richness, sentence length and punctuation habits to identify authors.</dd>
+
+    <dt>Diurnal Rhythm</dt>
+    <dd>A 24-hour activity pattern. If two users are always online at the same time of day, they might be the same person in the same timezone.</dd>
+
+    <dt>PGP Key</dt>
+    <dd>A public encryption key used for secure communication. Sharing the same PGP key across two platforms is a very strong link.</dd>
+
+    <dt>JARM Fingerprint</dt>
+    <dd>A unique digital fingerprint of a TLS/HTTPS server, used to identify whether two .onion services run on the same physical server.</dd>
+
+    <dt>SHA-256</dt>
+    <dd>A cryptographic algorithm that produces a unique 64-character "fingerprint" of any document. Used here to prove a dossier's integrity.</dd>
+
+    <dt>Replay Engine</dt>
+    <dd>A feature that plays back historical events in chronological order, like rewinding a recording of forum activity.</dd>
+
+    <dt>Evidence Challenge</dt>
+    <dd>An investigator's decision to dispute a specific piece of evidence, removing its weight from a correlation score.</dd>
+
+    <dt>Coordination Detection</dt>
+    <dd>Identifying groups of users who post in suspicious lock-step, replying to each other within seconds or always co-appearing in the same threads.</dd>
+
+    <dt>Evaluation Mode</dt>
+    <dd>A mode that compares the system's attribution hypotheses against a hidden ground-truth file to measure accuracy (Precision, Recall, F1 Score).</dd>
+
+    <dt>F1 Score</dt>
+    <dd>A single number (0–100%) that combines precision and recall to measure how accurate the system's guesses are overall.</dd>
+  </dl>
+
+  <div class="card" style="margin-top:32px;text-align:center">
+    <div style="font-size:28px;margin-bottom:8px"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#gi-search"/></svg></div>
+    <div style="font-weight:700;color:var(--heading);margin-bottom:6px">PRAGYA CHAKSHU</div>
+    <div style="font-size:13px;color:var(--muted)">
+      Controlled Cybersecurity Research &amp; Forensic Attribution Platform<br/>
+      Powered by FastAPI · React 19 · NetworkX · Cytoscape.js
+    </div>
+  </div>
+</div>
+
+</div><!-- body-offset -->
+</body>
+</html>

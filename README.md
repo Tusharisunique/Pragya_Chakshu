@@ -12,58 +12,7 @@
 **Pragya Chakshu** (_Sanskrit: "The Eye of Wisdom"_) is a controlled cybersecurity research and forensic investigation platform designed to analyze threat actor operations, cross-platform pseudonym continuity, longitudinal behavioral rhythms, and shared hosting infrastructure across historical darknet archives.
 
 The system integrates relational event storage, graph network analysis, natural language processing (NLP) stylometry, asynchronous time-cursor event replay, and cryptographic case dossier export into a dark-themed intelligence analyst workstation.
-
----
-
-## 🏛️ System Architecture
-
-```mermaid
-flowchart TD
-    subgraph INGESTION ["1. Streaming Ingestion and Normalization"]
-        D1[("forum/post.tsv (284 MB)")] --> A1["Forum Streaming Adapter"]
-        D2[("market/vendors.tsv & listings.tsv")] --> A2["Marketplace Adapter"]
-        D3[("network/edges.tsv")] --> A3["Interaction Network Adapter"]
-        A1 --> NORM["Event Normalizer & Regex Extractor (PGP, BTC, Onion)"]
-        A2 --> NORM
-        A3 --> NORM
-    end
-
-    subgraph STORAGE ["2. Dual-Engine Storage Layer"]
-        NORM --> SQLITE[("SQLite Database (pragya_chakshu.db)")]
-        NORM --> GRAPH[("Dual Graph Engine (Neo4j / NetworkX)")]
-    end
-
-    subgraph ANALYTICS ["3. Forensic Intelligence Engines"]
-        SQLITE --> STYLO["NLP Stylometry Engine (Yule's K, TTR, 4-grams)"]
-        SQLITE --> BEHAV["Behavioral Profiler (24h UTC Diurnal Rhythms)"]
-        STYLO --> CORR["Multi-Factor Correlation Engine"]
-        BEHAV --> CORR
-        SQLITE --> COORD["Coordination Discovery (Reply Cadence, Cliques)"]
-        CORR --> CHALLENGE["Human-in-the-Loop Challenge & Audit Log"]
-    end
-
-    subgraph STREAMING ["4. Asynchronous Replay Engine"]
-        SQLITE --> REPLAY["Time-Cursor Replay State Machine (1x to 60x)"]
-        REPLAY --> SSE["Server-Sent Events (/api/cases/{id}/replay/stream)"]
-    end
-
-    subgraph SYNTHETIC ["5. Controlled Infrastructure Simulation"]
-        SIM["Synthetic Infrastructure Generator (Bulletproof Hosts, JARM)"]
-        SIM -.->|"PROVENANCE = SYNTHETIC"| GRAPH
-    end
-
-    subgraph FRONTEND ["6. Analyst Workstation UI (React 19 + Cytoscape.js)"]
-        GRAPH --> CYTO["Interactive Investigation Graph Canvas"]
-        SSE --> FEED["Live Chronological Feed"]
-        CORR --> INSP["Evidence & Challenge Inspector"]
-        SQLITE --> EVAL["Evaluation Mode Dashboard (Precision, Recall, F1)"]
-        SQLITE --> DOSSIER["Forensic Case Dossier (SHA-256 Seal)"]
-    end
-```
-
----
-
-## 🔒 The Tripartite Provenance Model
+## The Tripartite Provenance Model
 
 To prevent analytical bias, hallucination, and data contamination, every record, node, indicator, and relationship strictly enforces one of three provenance tags:
 
@@ -72,12 +21,9 @@ To prevent analytical bias, hallucination, and data contamination, every record,
 | **`RESEARCH`**  | Authentic historical research archives from darknet markets and forums.                            | Forum posts, timestamps, marketplace vendor listings, PGP public keys, interaction edges, and ground-truth references.           |
 | **`DERIVED`**   | Algorithmic analytics, statistical models, and attribution hypotheses computed from research data. | Stylometric $K$ constants, diurnal histograms, multi-factor correlation scores, coordination strength %, and evaluation metrics. |
 | **`SYNTHETIC`** | Controlled, safely simulated infrastructure indicators.                                            | Bulletproof hosting subnets, synthetic TLS certificates (JARM hashes), SSH host keys, and simulated hidden services.             |
+## Core Capabilities
 
----
-
-## ⚡ Core Capabilities
-
-### 🌐 Capability 1: Controlled Synthetic Infrastructure Attribution
+### Capability 1: Controlled Synthetic Infrastructure Attribution
 
 Darknet operations route through Tor onion routing, which intentionally obscures origin server IPs and physical network topology. To demonstrate forensic infrastructure correlation safely without illegal active scanning:
 
@@ -85,7 +31,7 @@ Darknet operations route through Tor onion routing, which intentionally obscures
 - Creates simulated TLS certificates with **JARM fingerprints** and SSH host keys (RSA/ED25519).
 - Implements **co-hosting correlation (`CO_HOSTED_SERVER`)**: detects distinct `.onion` services sharing identical TLS certificates or SSH keys pointing back to a single physical server node.
 
-### 👤 Capability 2: Actor Tracking, Profiling & Evaluation Mode
+### Capability 2: Actor Tracking, Profiling & Evaluation Mode
 
 Correlates pseudonymous actors across disparate forums and marketplaces:
 
@@ -117,7 +63,7 @@ Correlates pseudonymous actors across disparate forums and marketplaces:
   - Dynamic confidence threshold slider ($\tau \in [0, 100]$) to analyze precision-recall curves.
   - **Strict Boundary:** Ground truth is isolated from Investigator Mode to prevent circular attribution.
 
-### 🤝 Capability 3: Coordinated Activity Discovery
+### Capability 3: Coordinated Activity Discovery
 
 Identifies multi-actor collusion, astroturfing, and coordinated darknet campaigns:
 
@@ -127,17 +73,14 @@ Identifies multi-actor collusion, astroturfing, and coordinated darknet campaign
 - Categorizes coordination patterns: `HIGHLY_SYNCHRONIZED_CASCADE`, `FREQUENT_CO_PARTICIPATION`, and `OCCASIONAL_THREAD_INTERACTION`.
 - Renders dashed cyan `COORDINATED_WITH` edges showing coordination percentage.
 
-### 📝 Capability 4: Investigator Field Notes & Case Annotations
+### Capability 4: Investigator Field Notes & Case Annotations
 
 Enables intelligence analysts to document observations, forensic rationales, and hypotheses directly within the investigation graph:
 
 - **Entity-Bound Notes**: Attach timestamps and notes to specific personas, posts, identifiers, or correlation edges.
 - **Audited Provenance**: Every note records investigator ID, ISO UTC timestamp, entity label, and type.
 - **Dossier & Chain of Custody Integration**: Field notes automatically compile into **Section 2** of the Printable Forensic Dossier and machine-readable JSON exports with SHA-256 seal integrity.
-
----
-
-## ⏱️ Time-Cursor Replay Engine (SSE)
+## Time-Cursor Replay Engine (SSE)
 
 Pragya Chakshu features an asynchronous chronological replay engine:
 
@@ -145,37 +88,28 @@ Pragya Chakshu features an asynchronous chronological replay engine:
 - Configurable speed multipliers: **1x**, **5x**, **20x**, and **60x**.
 - Advances historical time cursor chronologically through authentic dataset timestamps (`timestamp_occurred`).
 - Emits real-time Server-Sent Events (`GET /api/cases/{case_id}/replay/stream`) to update the live graph canvas and event feed without polling.
-
----
-
-## 📜 Forensic Case Dossier & Cryptographic Seal
+## Forensic Case Dossier & Cryptographic Seal
 
 Case documentation is exportable in two formats:
 
 - **Printable Forensic HTML Dossier (`GET /api/cases/{case_id}/export/dossier`)**: Formatted for print or PDF generation, featuring case summary, KPIs, persona attribution inventory, **analyst field notes & annotations**, human challenge audit history, and provenance breakdown.
 - **Structured JSON Export (`GET /api/cases/{case_id}/export/json`)**: Machine-readable forensic dossier.
 - **Digital SHA-256 Seal**: The entire case state is serialized and hashed with SHA-256 to create an immutable cryptographic fingerprint locking the forensic state at the time of export.
-
----
-
-## 🎨 Interactive Graph Canvas
+## Interactive Graph Canvas
 
 The Cytoscape-powered graph canvas is engineered for high readability and eliminates hairball clutter:
 
 - **View Presets**:
-  - 🎯 **Core Investigation**: Focuses on Personas, Active Correlations, Coordination, Identifiers, and Infrastructure. Automatically filters out raw message boxes and structural `PART_OF` lines.
-  - 👥 **Actor Attribution**: Focuses strictly on cross-platform identity links (`CORRELATED_WITH`) and PGP/BTC keys.
-  - ⚡ **Coordinated Activity**: Displays coordinated posting cliques and latency links.
-  - 🌐 **Infrastructure**: Displays physical servers, JARM TLS certificates, and Tor hidden services.
-  - 📦 **Full Raw**: Unfiltered forensic topology.
+  - **Core Investigation**: Focuses on Personas, Active Correlations, Coordination, Identifiers, and Infrastructure. Automatically filters out raw message boxes and structural `PART_OF` lines.
+  - **Actor Attribution**: Focuses strictly on cross-platform identity links (`CORRELATED_WITH`) and PGP/BTC keys.
+  - **Coordinated Activity**: Displays coordinated posting cliques and latency links.
+  - **Infrastructure**: Displays physical servers, JARM TLS certificates, and Tor hidden services.
+  - **Full Raw**: Unfiltered forensic topology.
 - **Interactive Neighborhood Spotlight**: Clicking or hovering any node or edge dims all unrelated elements to **10% opacity**, isolating that entity's direct network.
 - **Live Search & Locate**: Auto-pans and zooms to any persona handle, IP address, or onion URL.
 - **Layout Switcher**: Force-Directed (Spaced CoSE with collision avoidance), Concentric (degree rings), Hierarchical Tree, and Circular layouts.
 - **Interactive Legend**: Floating guide explaining entity colors and relationship line styles.
-
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 c:/projects/PC/
@@ -248,10 +182,7 @@ c:/projects/PC/
 │
 └── README.md                       # System documentation
 ```
-
----
-
-## 🚀 Quickstart & Setup Guide
+## Quickstart & Setup Guide
 
 ### Prerequisites
 
@@ -294,10 +225,7 @@ npm run dev
 ```
 
 - Open your browser at: **`http://localhost:5173`**
-
----
-
-## 🧪 Verification & Test Suite
+## Verification & Test Suite
 
 Run the automated integration test suite against the running backend:
 
@@ -314,10 +242,7 @@ python scratch/test_phase8_matches.py
 # Forensic Dossier & SHA-256 Digital Seal Export
 python scratch/test_phase9.py
 ```
-
----
-
-## ⚖️ Ethical Boundary & Research Disclaimer
+## Ethical Boundary & Research Disclaimer
 
 - **No Live Crawling**: Pragya Chakshu does not crawl, scan, probe, or connect to active darknet hidden services or live external networks.
 - **Controlled Demonstration**: Infrastructure indicators for Capability 1 are synthetically simulated with explicit `SYNTHETIC` provenance tags.

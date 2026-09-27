@@ -20,7 +20,7 @@ To prevent analytical bias, hallucination, and data contamination, every record,
 | :-------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
 | **`RESEARCH`**  | Authentic historical research archives from darknet markets and forums.                            | Forum posts, timestamps, marketplace vendor listings, PGP public keys, interaction edges, and ground-truth references.           |
 | **`DERIVED`**   | Algorithmic analytics, statistical models, and attribution hypotheses computed from research data. | Stylometric $K$ constants, diurnal histograms, multi-factor correlation scores, coordination strength %, and evaluation metrics. |
-| **`SYNTHETIC`** | Controlled, safely simulated infrastructure indicators.                                            | Bulletproof hosting subnets, synthetic TLS certificates (JARM hashes), SSH host keys, and simulated hidden services.             |
+| **`SYNTHETIC`** | Controlled infrastructure indicators.                                            | Bulletproof hosting subnets, synthetic TLS certificates (JARM hashes), and SSH host keys.             |
 ## Core Capabilities
 
 ### Capability 1: Controlled Synthetic Infrastructure Attribution
@@ -28,7 +28,7 @@ To prevent analytical bias, hallucination, and data contamination, every record,
 Darknet operations route through Tor onion routing, which intentionally obscures origin server IPs and physical network topology. To demonstrate forensic infrastructure correlation safely without illegal active scanning:
 
 - Generates realistic bulletproof hosting netblocks, ASN pools, and synthetic origin servers.
-- Creates simulated TLS certificates with **JARM fingerprints** and SSH host keys (RSA/ED25519).
+- Creates synthetic TLS certificates with **JARM fingerprints** and SSH host keys (RSA/ED25519).
 - Implements **co-hosting correlation (`CO_HOSTED_SERVER`)**: detects distinct `.onion` services sharing identical TLS certificates or SSH keys pointing back to a single physical server node.
 
 ### Capability 2: Actor Tracking, Profiling & Evaluation Mode
@@ -245,5 +245,5 @@ python scratch/test_phase9.py
 ## Ethical Boundary & Research Disclaimer
 
 - **No Live Crawling**: Pragya Chakshu does not crawl, scan, probe, or connect to active darknet hidden services or live external networks.
-- **Controlled Demonstration**: Infrastructure indicators for Capability 1 are synthetically simulated with explicit `SYNTHETIC` provenance tags.
+- **Controlled Demonstration**: Infrastructure indicators for Capability 1 are generated synthetically with explicit `SYNTHETIC` provenance tags.
 - **Analytical Hypotheses**: Persona correlation scores reflect mathematical statistical alignment across available signals. They represent investigative hypotheses and do not constitute proof of real-world legal identity.
